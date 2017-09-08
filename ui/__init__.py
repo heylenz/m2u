@@ -19,7 +19,7 @@ necessary to attach the m2u-window to the Programs main window.
 import sys
 import logging
 
-from PySide import QtGui
+from Qt import QtWidgets, QtGui, QtCore
 
 from m2u import core
 
@@ -29,7 +29,7 @@ _lg = logging.getLogger(__name__)
 
 
 this.main_window = None
-this.window_base_class = QtGui.QWidget
+this.window_base_class = QtWidgets.QWidget
 
 
 def set_window_base_class(cls):
@@ -37,7 +37,7 @@ def set_window_base_class(cls):
     this.window_base_class = cls
 
 
-def create_ui(parent_window):
+def create_ui(parent_window=None):
     from .mainwindow import MainWindow
     if this.main_window is None:
         _lg.info("No m2u window found, creating a new one.")

@@ -1,8 +1,8 @@
 
-from PySide import QtGui
+from Qt import QtWidgets, QtGui, QtCore
 
 
-class SubfolderBrowseDialog(QtGui.QFileDialog):
+class SubfolderBrowseDialog(QtWidgets.QFileDialog):
     """A dialog for choosing a subfolder of a designated top level folder.
 
     The user should not be able to select any folder that is not a child
@@ -12,8 +12,8 @@ class SubfolderBrowseDialog(QtGui.QFileDialog):
     def __init__(self, *args, **kwargs):
         super(SubfolderBrowseDialog, self).__init__(*args, **kwargs)
 
-        self.setFileMode(QtGui.QFileDialog.DirectoryOnly)
-        self.setOption(QtGui.QFileDialog.ShowDirsOnly)
+        self.setFileMode(QtWidgets.QFileDialog.DirectoryOnly)
+        self.setOption(QtWidgets.QFileDialog.ShowDirsOnly)
 
         self.topLevelDirectory = None
 

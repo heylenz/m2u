@@ -1,11 +1,11 @@
 
-from PySide import QtGui
-from PySide import QtCore
+from Qt import QtWidgets, QtGui, QtCore
+
 
 from m2u import settings
 
 
-class PopoverWidget(QtGui.QWidget):
+class PopoverWidget(QtWidgets.QWidget):
     """A widget that shows as a popup, positioned on the top-right of
     a specified other widget.
     """
@@ -22,15 +22,15 @@ class PopoverWidget(QtGui.QWidget):
 
 
 class ExportSettingsWidget(PopoverWidget):
-    def __init__(self, parent, widget, *args, **kwargs):
+    def __init__(self, parent, widget, *args, **kwargs):    
         super(ExportSettingsWidget, self).__init__(
             parent, widget, *args, **kwargs)
 
-        self.alwaysShowExportWinChkbx = QtGui.QCheckBox(
+        self.alwaysShowExportWinChkbx = QtWidgets.QCheckBox(
             "Always show Export Window")
         self.alwaysShowExportWinChkbx.toggled.connect(
             self.alwaysShowExportWinChkbxClicked)
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.alwaysShowExportWinChkbx)
         self.setLayout(layout)
 

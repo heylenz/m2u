@@ -7,7 +7,7 @@ This Widget will be integrated into the m2uMainWindow by the common UI.
 
 import os
 
-from PySide import QtGui
+from Qt import QtWidgets, QtCore, QtGui
 
 from m2u.ue4 import assets
 
@@ -15,7 +15,7 @@ thispath = os.path.dirname(os.path.realpath(__file__))
 icoFetch = QtGui.QIcon(os.path.join(thispath, "icoFetch.png"))
 
 
-class ue4PSUIFetchWidget(QtGui.QWidget):
+class ue4PSUIFetchWidget(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super(ue4PSUIFetchWidget, self).__init__(*args, **kwargs)
 
@@ -23,13 +23,13 @@ class ue4PSUIFetchWidget(QtGui.QWidget):
         self.connectUI()
 
     def buildUI(self):
-        self.fetchSelectedBtn = QtGui.QPushButton(text="Fast Fetch Selected")
+        self.fetchSelectedBtn = QtWidgets.QPushButton(text="Fast Fetch Selected")
         self.fetchSelectedBtn.setIcon(icoFetch)
         tooltip = ("Get the selected objects from the Editor by exporting to "
                    "a single .fbx file. ")
         self.fetchSelectedBtn.setToolTip(tooltip)
 
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         layout.addWidget(self.fetchSelectedBtn)
         layout.setContentsMargins(1, 1, 1, 1)
         layout.addStretch()

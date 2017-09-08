@@ -10,8 +10,7 @@ continue with the actual export.
 
 import os
 
-from PySide import QtCore
-from PySide import QtGui
+from Qt import QtWidgets, QtCore, QtGui
 
 from m2u import ui
 from m2u import core
@@ -35,7 +34,7 @@ class ExportWindow(ui.window_base_class):
         self.discrepancyBrush = QtGui.QBrush(QtCore.Qt.red)
         self.untaggedBrush = QtGui.QBrush(QtCore.Qt.yellow)
 
-        self.browseDialog = SubfolderBrowseDialog()
+        # self.browseDialog = SubfolderBrowseDialog()
 
         self.buildUI()
         self.connectUI()
@@ -43,36 +42,36 @@ class ExportWindow(ui.window_base_class):
     def buildUI(self):
         """create the widgets and layouts"""
         # left stuff
-        leftLayout = QtGui.QVBoxLayout()
+        leftLayout = QtWidgets.QVBoxLayout()
         leftLayout.setContentsMargins(1, 1, 1, 1)
-        leftWidget = QtGui.QWidget()  # widget required for QSplitter
+        leftWidget = QtWidgets.QWidget()  # widget required for QSplitter
         # - asset tree
-        self.assetTree = QtGui.QTreeWidget()
+        self.assetTree = QtWidgets.QTreeWidget()
         self.assetTree.setColumnCount(2)
         self.assetTree.setHeaderLabels(["Assets / Instances", "Subpath"])
-        self.assetTree.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
+        self.assetTree.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.assetTree.setColumnWidth(0, 160)
         leftLayout.addWidget(self.assetTree)
         # - info labels
-        self.discrepancyLbl = QtGui.QLabel("Objects with same AssetPath but different geometry detected!")
+        self.discrepancyLbl = QtWidgets.QLabel("Objects with same AssetPath but different geometry detected!")
         p = self.discrepancyLbl.palette()
         p.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, self.discrepancyBrush)
         self.discrepancyLbl.setPalette(p)
-        self.untaggedLbl = QtGui.QLabel("Untagged objects detected, assigned auto-generated names.")
+        self.untaggedLbl = QtWidgets.QLabel("Untagged objects detected, assigned auto-generated names.")
         p = self.untaggedLbl.palette()
         p.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, self.untaggedBrush)
         self.untaggedLbl.setPalette(p)
         leftLayout.addWidget(self.discrepancyLbl)
         leftLayout.addWidget(self.untaggedLbl)
         # - left buttons
-        layout = QtGui.QGridLayout()
-        self.selectInstancesBtn = QtGui.QPushButton("Select Instances")
+        layout = QtWidgets.QGridLayout()
+        self.selectInstancesBtn = QtWidgets.QPushButton("Select Instances")
         self.selectInstancesBtn.setDisabled(True)
         layout.addWidget(self.selectInstancesBtn, 0, 0)
-        self.removeBtn = QtGui.QPushButton("Remove")
+        self.removeBtn = QtWidgets.QPushButton("Remove")
         self.removeBtn.setDisabled(True)
         layout.addWidget(self.removeBtn, 1, 0)
-        self.makeNewBtn = QtGui.QPushButton("Make New Unique(s)")
+        self.makeNewBtn = QtWidgets.QPushButton("Make New Unique(s)")
         self.makeNewBtn.setDisabled(True)
         layout.addWidget(self.makeNewBtn, 1, 1)
 
@@ -80,39 +79,39 @@ class ExportWindow(ui.window_base_class):
         leftWidget.setLayout(leftLayout)
 
         # right stuff
-        rightLayout = QtGui.QVBoxLayout()
+        rightLayout = QtWidgets.QVBoxLayout()
         rightLayout.setContentsMargins(1, 1, 1, 1)
-        rightWidget = QtGui.QWidget()
+        rightWidget = QtWidgets.QWidget()
         # - editing group box
-        editGrp = QtGui.QGroupBox("Edit Selected")
-        grpLayout = QtGui.QVBoxLayout()
+        editGrp = QtWidgets.QGroupBox("Edit Selected")
+        grpLayout = QtWidgets.QVBoxLayout()
         grpLayout.setContentsMargins(1, 1, 1, 1)
         # - - asset path edit
-        subpathLayout = QtGui.QGridLayout()
-        label = QtGui.QLabel("Set Asset Subpath")
+        subpathLayout = QtWidgets.QGridLayout()
+        label = QtWidgets.QLabel("Set Asset Subpath")
         subpathLayout.addWidget(label, 0, 0)
-        self.subpathEdit = QtGui.QLineEdit()
+        self.subpathEdit = QtWidgets.QLineEdit()
         subpathLayout.addWidget(self.subpathEdit, 1, 0)
-        self.subpathBrowseBtn = QtGui.QToolButton()
+        self.subpathBrowseBtn = QtWidgets.QToolButton()
         self.subpathBrowseBtn.setIcon(icons.icoBrowse)
         self.subpathBrowseBtn.setToolTip("Browse")
         subpathLayout.addWidget(self.subpathBrowseBtn, 1, 1)
-        self.subpathAssignBtn = QtGui.QPushButton("Set")
+        self.subpathAssignBtn = QtWidgets.QPushButton("Set")
         subpathLayout.addWidget(self.subpathAssignBtn, 1, 2)
         grpLayout.addItem(subpathLayout)
         # - - prefix and suffix
-        prefixLayout = QtGui.QGridLayout()
-        label = QtGui.QLabel("Set Prefix")
+        prefixLayout = QtWidgets.QGridLayout()
+        label = QtWidgets.QLabel("Set Prefix")
         prefixLayout.addWidget(label, 0, 0)
-        self.prefixEdit = QtGui.QLineEdit()
+        self.prefixEdit = QtWidgets.QLineEdit()
         prefixLayout.addWidget(self.prefixEdit, 0, 1)
-        self.prefixAssignBtn = QtGui.QPushButton("Set")
+        self.prefixAssignBtn = QtWidgets.QPushButton("Set")
         prefixLayout.addWidget(self.prefixAssignBtn, 0, 2)
-        label = QtGui.QLabel("Set Suffix")
+        label = QtWidgets.QLabel("Set Suffix")
         prefixLayout.addWidget(label, 1, 0)
-        self.suffixEdit = QtGui.QLineEdit()
+        self.suffixEdit = QtWidgets.QLineEdit()
         prefixLayout.addWidget(self.suffixEdit, 1, 1)
-        self.suffixAssignBtn = QtGui.QPushButton("Set")
+        self.suffixAssignBtn = QtWidgets.QPushButton("Set")
         prefixLayout.addWidget(self.suffixAssignBtn, 1, 2)
         grpLayout.addItem(prefixLayout)
 
@@ -120,20 +119,20 @@ class ExportWindow(ui.window_base_class):
         rightLayout.addWidget(editGrp)
 
         # - right buttons
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.setColumnStretch(0,1)
-        self.assignAssetDataBtn = QtGui.QPushButton("Assign Edited Data")
+        self.assignAssetDataBtn = QtWidgets.QPushButton("Assign Edited Data")
         self.assignAssetDataBtn.setToolTip("Only assign the data to the objects in the scene. Don't export.")
         self.assignAssetDataBtn.setIcon(icons.icoDoAssign)
         layout.addWidget(self.assignAssetDataBtn, 0, 1)
-        self.exportSelectedBtn = QtGui.QPushButton("Export Selected")
+        self.exportSelectedBtn = QtWidgets.QPushButton("Export Selected")
         self.exportSelectedBtn.setToolTip("Export only the assets that are selected in the list.")
         self.exportSelectedBtn.setIcon(icons.icoDoExportSel)
         layout.addWidget(self.exportSelectedBtn, 1, 1)
-        self.cancelBtn = QtGui.QPushButton("Cancel")
+        self.cancelBtn = QtWidgets.QPushButton("Cancel")
         self.cancelBtn.setIcon(icons.icoCancel)
         layout.addWidget(self.cancelBtn, 2, 0)
-        self.exportAllBtn = QtGui.QPushButton("Export")
+        self.exportAllBtn = QtWidgets.QPushButton("Export")
         self.exportAllBtn.setIcon(icons.icoDoExport)
         layout.addWidget(self.exportAllBtn, 2, 1)
 
@@ -142,14 +141,14 @@ class ExportWindow(ui.window_base_class):
         rightWidget.setLayout(rightLayout)
 
         # add all onto the form (splitted)
-        splitter = QtGui.QSplitter()
+        splitter = QtWidgets.QSplitter()
         splitter.addWidget(leftWidget)
         splitter.addWidget(rightWidget)
         leftWidget.resize(350,200)
-        # leftWidget.setSizePolicy(QtGui.QSizePolicy.Ignored,QtGui.QSizePolicy.Preferred)
-        # rightWidget.setSizePolicy(QtGui.QSizePolicy.Maximum,QtGui.QSizePolicy.Preferred)
+        # leftWidget.setSizePolicy(QtWidgets.QSizePolicy.Ignored,QtWidgets.QSizePolicy.Preferred)
+        # rightWidget.setSizePolicy(QtWidgets.QSizePolicy.Maximum,QtWidgets.QSizePolicy.Preferred)
         # splitter.setStretchFactor(0, 100)
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.setSpacing(1)
         layout.setContentsMargins(1, 1, 1, 1)
         layout.addWidget(splitter)
@@ -193,7 +192,7 @@ class ExportWindow(ui.window_base_class):
             if len(fpath) == 0:
                 # If there is no subpath, let us display at least a slash.
                 fpath = "/"
-            asset_item = QtGui.QTreeWidgetItem(self.assetTree)
+            asset_item = QtWidgets.QTreeWidgetItem(self.assetTree)
             asset_item.setText(0, fname)
             asset_item.setText(1, fpath)
             asset_item.setFlags(QtCore.Qt.ItemIsEnabled |
@@ -202,7 +201,7 @@ class ExportWindow(ui.window_base_class):
 
             self.assetItemList.append(asset_item)
             for obj_name, obj_ref in entry.obj_list:
-                obj_item = QtGui.QTreeWidgetItem(asset_item)
+                obj_item = QtWidgets.QTreeWidgetItem(asset_item)
                 obj_item.setText(0, obj_name)
                 obj_item.setFont(0, self.italicFont)
                 # obj_item.setDisabled(True)

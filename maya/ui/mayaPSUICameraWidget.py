@@ -9,13 +9,13 @@ import os
 
 from m2u.maya import cameras
 
-from PySide import QtGui
+from Qt import QtWidgets, QtCore, QtGui
 
 thispath = os.path.dirname(os.path.realpath(__file__))
 icoCamera = QtGui.QIcon(os.path.join(thispath, "icoCamera.png"))
 
 
-class mayaPSUICameraWidget(QtGui.QWidget):
+class mayaPSUICameraWidget(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super(mayaPSUICameraWidget, self).__init__(*args, **kwargs)
 
@@ -23,13 +23,13 @@ class mayaPSUICameraWidget(QtGui.QWidget):
         self.connectUI()
 
     def buildUI(self):
-        self.setupCameraBtn = QtGui.QPushButton(text="Setup Cameras")
+        self.setupCameraBtn = QtWidgets.QPushButton(text="Setup Cameras")
         self.setupCameraBtn.setIcon(icoCamera)
         tooltip = ("Set clip planes, FOV and positions of Maya's default "
                    "cameras to work better with game engine dimensions.")
         self.setupCameraBtn.setToolTip(tooltip)
 
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         layout.addWidget(self.setupCameraBtn)
         layout.setContentsMargins(1, 1, 1, 1)
         layout.addStretch()

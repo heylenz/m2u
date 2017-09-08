@@ -14,23 +14,23 @@ def create_ui():
     #   exist before UI-creation.
     try:
         # The import is only to determine if PySide exists.
-        import PySide  # noqa
+        from Qt import QtWidgets, QtGui, QtCore
     except ImportError:
-        _lg.error("Unable to load PySide.")
+        _lg.error("Unable to load Qt.py.")
         raise
 
-    from m2u import ui
+    from m2u import ui    
     from maya import OpenMayaUI as omui
-    from PySide import QtGui
-    from shiboken import wrapInstance
+    from Qt import QtWidgets, QtGui, QtCore
 
-    maya_main_window_ptr = omui.MQtUtil.mainWindow()
-    maya_main_window = wrapInstance(long(maya_main_window_ptr), QtGui.QWidget)
+
+
+
     # from maya.app.general import mayaMixin
     # mayaQtBaseClass = mayaMixin.MayaQWidgetDockableMixin
     # mayaQtBaseClass = mayaMixin.MayaQWidgetBaseMixin
     # ui.set_window_base_class(mayaQtBaseClass)
-    ui.create_ui(maya_main_window)
+    ui.create_ui()
 
 
 def add_specific_to_common_ui(main_window):

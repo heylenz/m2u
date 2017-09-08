@@ -4,7 +4,7 @@ icons used by other widgets will be loaded here
 
 import os
 
-from PySide import QtGui
+from Qt import QtWidgets, QtGui, QtCore
 
 thispath = os.path.dirname(os.path.realpath(__file__))
 resFolder = os.path.join(thispath, "res")

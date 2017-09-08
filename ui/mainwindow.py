@@ -1,7 +1,6 @@
 
 # We can assume that PySide exists, when this file is loaded.
-from PySide import QtCore
-from PySide import QtGui
+from Qt import QtWidgets, QtCore
 # from PySide.QtUiTools import QUiLoader
 
 import m2u
@@ -35,54 +34,54 @@ class MainWindow(ui.window_base_class):
     def buildUI(self):
         """create the widgets and layouts"""
         # connect row
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         layout.setContentsMargins(1, 1, 1, 1)
-        self.connectBtn = QtGui.QPushButton(text="Connect")
+        self.connectBtn = QtWidgets.QPushButton(text="Connect")
         layout.addWidget(self.connectBtn)
-        self.addressEdit = QtGui.QLineEdit()
+        self.addressEdit = QtWidgets.QLineEdit()
         layout.addWidget(self.addressEdit)
         layout.addStretch()
-        self.settingsBtn = QtGui.QToolButton()
+        self.settingsBtn = QtWidgets.QToolButton()
         self.settingsBtn.setIcon(icons.icoSettings)
         self.settingsBtn.setDisabled(True)
         layout.addWidget(self.settingsBtn)
-        self.topRowWidget = QtGui.QWidget()
+        self.topRowWidget = QtWidgets.QWidget()
         self.topRowWidget.setLayout(layout)
 
         # sync options checkboxes
-        self.syncOptionsGrp = QtGui.QGroupBox("Sync Whaaat?")
-        layout = QtGui.QGridLayout()
-        self.syncCameraChkbx = QtGui.QCheckBox("Sync Camera")
+        self.syncOptionsGrp = QtWidgets.QGroupBox("Sync Whaaat?")
+        layout = QtWidgets.QGridLayout()
+        self.syncCameraChkbx = QtWidgets.QCheckBox("Sync Camera")
         layout.addWidget(self.syncCameraChkbx, 0, 0)
-        self.syncObjectsChkbx = QtGui.QCheckBox("Sync Objects")
+        self.syncObjectsChkbx = QtWidgets.QCheckBox("Sync Objects")
         layout.addWidget(self.syncObjectsChkbx, 1, 0)
-        self.syncSelectionChkbx = QtGui.QCheckBox("Sync Selection")
+        self.syncSelectionChkbx = QtWidgets.QCheckBox("Sync Selection")
         self.syncSelectionChkbx.setDisabled(True)
         layout.addWidget(self.syncSelectionChkbx, 1, 1)
-        self.syncVisibilityChkbx = QtGui.QCheckBox("Sync Visibility")
+        self.syncVisibilityChkbx = QtWidgets.QCheckBox("Sync Visibility")
         layout.addWidget(self.syncVisibilityChkbx, 2, 0)
-        self.syncLayersChkbx = QtGui.QCheckBox("Sync Layers")
+        self.syncLayersChkbx = QtWidgets.QCheckBox("Sync Layers")
         layout.addWidget(self.syncLayersChkbx, 3, 0)
         layout.setColumnStretch(2, 1)
         self.syncOptionsGrp.setLayout(layout)
 
         # send and export buttons
-        self.sendGrp = QtGui.QGroupBox("Send/Export")
-        layout = QtGui.QHBoxLayout()
+        self.sendGrp = QtWidgets.QGroupBox("Send/Export")
+        layout = QtWidgets.QHBoxLayout()
         layout.setSpacing(1)
         layout.setContentsMargins(1, 1, 1, 1)
-        self.sendSelBtn = QtGui.QToolButton()
+        self.sendSelBtn = QtWidgets.QToolButton()
         self.sendSelBtn.setIcon(icons.icoSendToEd)
         self.sendSelBtn.setIconSize(QtCore.QSize(64, 32))
         self.sendSelBtn.setToolTip("Send selected objects to Editor, assemble the scene. Export assets if necessary.")  # noqa
         layout.addWidget(self.sendSelBtn)
-        self.exportSelBtn = QtGui.QToolButton()
+        self.exportSelBtn = QtWidgets.QToolButton()
         self.exportSelBtn.setIcon(icons.icoExportToEd)
         self.exportSelBtn.setIconSize(QtCore.QSize(64, 32))
         self.exportSelBtn.setToolTip("Export assets of selected objects to Editor. Do not assemble the scene.")  # noqa
         layout.addWidget(self.exportSelBtn)
         layout.addStretch()
-        self.sendOptionsBtn = QtGui.QToolButton()
+        self.sendOptionsBtn = QtWidgets.QToolButton()
         self.sendOptionsBtn.setIcon(icons.icoSettings)
         self.sendOptionsBtn.setIconSize(QtCore.QSize(32, 32))
         self.exportSettingsWgt = ExportSettingsWidget(parent=self,
@@ -93,7 +92,7 @@ class MainWindow(ui.window_base_class):
         self.sendGrp.setLayout(layout)
 
         # add all onto the main form
-        formLayout = QtGui.QVBoxLayout()
+        formLayout = QtWidgets.QVBoxLayout()
         formLayout.addWidget(self.topRowWidget)
         formLayout.addWidget(self.syncOptionsGrp)
         formLayout.addWidget(self.sendGrp)
@@ -102,7 +101,7 @@ class MainWindow(ui.window_base_class):
         # A widget for this dock widget
         # (a dock widget cannot have a layout itself)
         self.setLayout(formLayout)
-        # base = QtGui.QWidget()
+        # base = QtWidgets.QWidget()
         # base.setLayout(formLayout)
         # self.setWidget(base)
         # self.layout = base.layout # yes, overwrite the function
